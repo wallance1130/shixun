@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.tarena.pojo.User;
+import cn.com.tarena.pojo.UserInfo;
 import cn.com.tarena.pojo.product;
 import cn.com.tarena.pojo.receiver;
 import cn.com.tarena.service.ReciverService;

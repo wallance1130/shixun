@@ -2,11 +2,19 @@ package cn.com.tarena.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.com.tarena.pojo.UserInfo;
+import cn.com.tarena.pojo.receiver;
+import cn.com.tarena.service.OrderService;
+import cn.com.tarena.service.UserService;
+import cn.com.tarena.service.impl.ServiceFactory;
 
 
 public class userModify extends HttpServlet{
@@ -16,10 +24,22 @@ public class userModify extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//super.doGet(req, resp);
+		
+		
+		
+		UserService userinfoService = ServiceFactory.getuserList();
+		
+		//String uid = req.getParameter("name2");
+		
+		List userinfolist = userinfoService.getStudentList("admin");
+		
+		touserinfo(resp,userinfolist);
+	}
+	private void touserinfo(HttpServletResponse resp,List userinfolist) throws IOException {
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter out = resp.getWriter();
+		for(Iterator<UserInfo> it = userinfolist.iterator();it.hasNext();){
+			UserInfo re = it.next();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<html>");
 		out.println("	<head>");
@@ -95,19 +115,19 @@ public class userModify extends HttpServlet{
         out.println("			<tr>");
         out.println("				<td width=\"40%\" class=\"tablebody1\"><b>用户名</b>：<br>英文字母或数字，最大长度为8位</td>");
         out.println("				<td width=\"60%\" class=\"tablebody1\">");
-        out.println("				<input type=\"text\" maxLength=\"12\" size=\"32\"  value=\"tarena\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" maxLength=\"12\" size=\"32\"  value=\""+re.getUserid()+"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("				<font color=\"#FF0000\">*</font></td>");
         out.println("			</tr>");
         out.println("			<tr>");
         out.println("				<td width=\"40%\" class=\"tablebody1\"><b>密码</b>：<br>数字，6到8位</td>");
         out.println("				<td width=\"60%\" class=\"tablebody1\">");
-        out.println("				<input type=\"password\" maxLength=\"12\" size=\"32\" name=\"password\" value=\"tarena\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"password\" maxLength=\"12\" size=\"32\" name=\"password\" value=\""+ re.getUserpassword()+"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("				<font color=\"#FF0000\">*</font></td>");
         out.println("			</tr>");
         out.println("			<tr>");
         out.println("				<td width=\"40%\" class=\"tablebody1\"><b>确认密码</b>：<br>数字，6到8位</td>");
         out.println("				<td width=\"60%\" class=\"tablebody1\">");
-        out.println("				<input type=\"password\" maxLength=\"12\" size=\"32\" name=\"password2\" value=\"tarena\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"password\" maxLength=\"12\" size=\"32\" name=\"password2\" value=\""+ re.getUserpassword()+"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("				<font color=\"#FF0000\">*</font></td>");
         out.println("			</tr>");
         out.println("			<tr>");
@@ -158,43 +178,43 @@ public class userModify extends HttpServlet{
         out.println("	    					<option value=\"36\" >中国香港</option>");
         out.println("	    					<option value=\"37\" >中国台湾</option>");
         out.println("				</select>省");
-        out.println("				<input type=\"text\" size=\"8\" name=\"city\" value=\"黄埔\" style=\"font-family: Tahoma,Verdana,����; font-size: 12px; line-height: 15px; color: #000000\"/>��/��</td>");
+        out.println("				<input type=\"text\" size=\"8\" name=\"city\" value=\""+ re.getCity() +"\" style=\"font-family: Tahoma,Verdana,����; font-size: 12px; line-height: 15px; color: #000000\"/>��/��</td>");
         out.println("			</tr>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>联系地址1</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"64\" maxlength=\"32\" name=\"street1\" value=\"北京东路668号B区901\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"64\" maxlength=\"32\" name=\"street1\" value=\""+ re.getStreet1() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>联系地址2</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"64\" maxlength=\"32\" name=\"street2\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"64\" maxlength=\"32\" name=\"street2\" value=\""+ re.getStreet2() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>邮编</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"32\" maxlength=\"8\" name=\"zip\" value=\"200001\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"32\" maxlength=\"8\" name=\"zip\" value=\""+ re.getZip() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>家庭电话</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"homephone\" value=\"61202663\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"homephone\" value=\""+ re.getHomephone() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>办公室电话</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"officephone\" value=\"61202663\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"officephone\" value=\""+ re.getOfficephone() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("				<td class=\"tablebody1\"><b>手机</b>：</td>");
         out.println("				<td class=\"tablebody1\">");
-        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"officephone\" value=\"13211161676\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
+        out.println("				<input type=\"text\" size=\"32\" maxlength=\"16\" name=\"officephone\" value=\""+ re.getCellphone() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/>");
         out.println("			</td>");
         out.println("			<tr>");
         out.println("");
         out.println("			<td class=\"tablebody1\"><b>Email地址</b>：<br>	请输入有效的邮件地址</td>");
         out.println("			<td class=\"tablebody1\">");
-        out.println("			<input maxLength=\"50\" size=\"32\" maxlength=\"32\" name=\"email\" value=\"wawawa115@sina.com\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/></td>");
+        out.println("			<input maxLength=\"50\" size=\"32\" maxlength=\"32\" name=\"email\" value=\""+ re.getEmail() +"\" style=\"font-family: Tahoma,Verdana,宋体; font-size: 12px; line-height: 15px; color: #000000\"/></td>");
         out.println("			</tr>");
         out.println("			<tr>");
         out.println("			<td class=\"tablebody2\" valign=\"middle\" colspan=\"2\" align=\"center\">");
@@ -227,6 +247,7 @@ public class userModify extends HttpServlet{
         out.println("	</body>");
         out.println("</html>");
         out.println("");
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ import cn.com.tarena.service.OrderService;
 import cn.com.tarena.service.OrderlineproductService;
 import cn.com.tarena.service.ProductService;
 import cn.com.tarena.service.ReciverService;
+import cn.com.tarena.service.UserService;
 
 public class ServiceFactory {
 
@@ -35,5 +36,13 @@ public class ServiceFactory {
 		
 		return orderlineService;
 	}
+	
+	public static UserService getuserList() {
+		// TODO Auto-generated method stub
+		UserService userinfoService = new UserServiceImpl();
+		
+		return userinfoService;
+	}
+	
 
 }
