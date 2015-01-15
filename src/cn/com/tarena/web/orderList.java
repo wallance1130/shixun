@@ -22,38 +22,11 @@ public class orderList extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//super.doGet(req, resp);
-		try{
-		OrderService orderService = ServiceFactory.getOrderList();
-
-		List orderlist = orderService.getStudentList();
-		
-		toOrderList(resp,orderlist);
-		} catch (Exception e){
-			toError(resp,e.getMessage());
-		}
-	}
-	private void toError(HttpServletResponse resp, String message) throws IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out = resp.getWriter();
-		
-		out.println("<html>");
-		out.println("<head>");
-		out.println("	<title>Error</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("	<h2 align=\"center\">Error</h2>");
-		out.println("	<hr>");
-		out.println("	System Error," + message + "!");
-		out.println("</body>");
-		out.println("</html>");
-		
-		out.close();
-		
-	}
-	private void toOrderList(HttpServletResponse resp,List orderlist) throws IOException {
 		resp.setCharacterEncoding("UTF-8");
+		
+		List orderlist = (List)req.getAttribute("orderlist");
+		
+		
 		PrintWriter out = resp.getWriter();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<html>");
@@ -136,7 +109,8 @@ public class orderList extends HttpServlet{
 		//out.println("      <form name = 'wc' method='post' action='CurrentServlet'> "+ order.getOrderid() +"");
 		//out.println("					<input type=\"button\" value=\"明细\" onclick=\"javascript:window.location='CurrentServlet';\">");
 		//out.println("      </form>");
-		out.println("					<input type=\"button\" value=\"明细\" onclick=\"javascript:window.open('CurrentServlet?name="+order.getOrderid()+"')\">");
+		out.println("					<input type=\"button\" value=\"明细\" onclick=\"javascript:window.open('CurrentServlet.action?name="+order.getOrderid()+"')\">");
+		
 
 		out.println("				</td>");
 		out.println("			</tr>");
@@ -174,7 +148,9 @@ public class orderList extends HttpServlet{
 		out.println("<!-- Footer End -->");
 		out.println("	</body>");
 		out.println("</html>");
+		
 	}
+	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

@@ -62,6 +62,17 @@
 		<servlet-class>cn.com.tarena.web.userRegister</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>ControllerServlet</servlet-name>
+		<servlet-class>cn.com.tarena.web.control.ControllerServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ErrorServlet</servlet-name>
+		<servlet-class>cn.com.tarena.web.ErrorServlet</servlet-class>
+	</servlet>
+	
+	
 	<servlet-mapping>
 		<servlet-name>CurrentServlet</servlet-name>
 		<url-pattern>/CurrentServlet</url-pattern>
@@ -110,5 +121,15 @@
 	<servlet-mapping>
 		<servlet-name>userRegister</servlet-name>
 		<url-pattern>/userRegister</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ErrorServlet</servlet-name>
+		<url-pattern>/ErrorServletr</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ControllerServlet</servlet-name>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -21,18 +21,19 @@ import cn.com.tarena.service.impl.ServiceFactory;
 
 public class CurrentServlet extends HttpServlet{
 
+	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//super.doGet(req, resp);
+
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter out = resp.getWriter();
 		String id = req.getParameter("name");
-		System.out.println(id);
-		ReciverService reciverService = ServiceFactory.getreciverList();
+		//System.out.println(id);
+		/*ReciverService reciverService = ServiceFactory.getreciverList();
 
-		List reciverlist = reciverService.getStudentList(id);
+		List reciverlist = reciverService.getStudentList(id);*/
+		List reciverlist = (List)req.getAttribute("reciverlist");
 		
 		//resp.setCharacterEncoding("UTF-8");
 		
